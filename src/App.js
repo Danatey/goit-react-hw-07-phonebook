@@ -1,7 +1,12 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "./redax/actions";
+
+import {
+  fetchContacts,
+  postContact,
+  deleteContact,
+  filterContacts,
+} from "./redax/operations";
 
 import ContactForm from "./Components/ContactForm";
 import Filter from "./Components/Filter";
@@ -18,6 +23,10 @@ const App = () => {
   const filter = useSelector((state) => state.contacts.filter);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
@@ -28,7 +37,7 @@ const App = () => {
         setNumber(value);
         break;
       case "Find contacts by name":
-        dispatch(actions.filterContacts(value));
+        dispatch(filterContacts(value));
         break;
       default:
         return;
@@ -44,7 +53,8 @@ const App = () => {
       return;
     }
 
-    dispatch(actions.addContact({ name, number }));
+    dispatch(postContact({ name, number }));
+    dispatch(fetchContacts());
 
     reset();
   };
@@ -55,15 +65,16 @@ const App = () => {
   };
 
   const deleteHandler = (contactId) => {
-    dispatch(actions.deleteContact(contactId));
+    dispatch(deleteContact(contactId));
   };
 
-  const handleFilter = () => {
-    const normalizedFilter = filter.toLocaleLowerCase();
-    const filteredContactList = contacts.filter((contact) =>
-      contact.name.toLocaleLowerCase().includes(normalizedFilter)
-    );
-    return filteredContactList;
+  const handleFilter = async () => {
+    if (contacts.filter !== undefined) {
+      console.log(contacts.filter);
+      return await contacts.filter((contact) =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
   };
 
   return (
