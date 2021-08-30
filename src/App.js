@@ -66,12 +66,13 @@ const App = () => {
 
   const deleteHandler = (contactId) => {
     dispatch(deleteContact(contactId));
+    dispatch(fetchContacts());
   };
 
-  const handleFilter = async () => {
+  const handleFilter = () => {
     if (contacts.filter !== undefined) {
-      console.log(contacts.filter);
-      return await contacts.filter((contact) =>
+      // console.log(contacts.filter);
+      return contacts.filter((contact) =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       );
     }

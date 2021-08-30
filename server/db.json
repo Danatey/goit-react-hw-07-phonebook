@@ -1,29 +1,3 @@
 {
-  "contacts": [
-    {
-      "name": "bbgffg",
-      "number": "15050505050",
-      "id": 1
-    },
-    {
-      "name": "bbgffg",
-      "number": "15050505050",
-      "id": 2
-    },
-    {
-      "name": "bbgffg",
-      "number": "15050505050",
-      "id": 3
-    },
-    {
-      "name": "bbgffg",
-      "number": "15050505050",
-      "id": 4
-    },
-    {
-      "name": "bbgffg",
-      "number": "15050505050",
-      "id": 5
-    }
-  ]
+  "contacts": []
 }
