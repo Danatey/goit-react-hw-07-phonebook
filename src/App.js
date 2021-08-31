@@ -54,7 +54,6 @@ const App = () => {
     }
 
     dispatch(postContact({ name, number }));
-    dispatch(fetchContacts());
 
     reset();
   };
@@ -64,9 +63,8 @@ const App = () => {
     setNumber("");
   };
 
-  const deleteHandler = (contactId) => {
-    dispatch(deleteContact(contactId));
-    dispatch(fetchContacts());
+  const deleteHandler = async (contactId) => {
+    await dispatch(deleteContact(contactId));
   };
 
   const handleFilter = () => {

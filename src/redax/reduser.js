@@ -11,7 +11,7 @@ const items = createReducer([], {
   [postContact.fulfilled]: (state, action) => [...state, action.payload],
 
   [deleteContact.fulfilled]: (state, action) =>
-    state.filter((el) => el.id !== action.payload),
+    state.filter((element) => element.id !== action.meta.arg),
 });
 
 const filter = createReducer("", {
